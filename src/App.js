@@ -1,12 +1,13 @@
 import React from 'react';
-import ClassCounter from './components/ClassCounter';
+import PostItem from './components/PostItem';
+import './styles/App.css';
 
 function App() {
 	return (
 		<div className='App'>
-			<ClassCounter />
-			<ClassCounter />
-			<ClassCounter />
+			<PostItem post={{ id: 1, title: 'JavaScript', body: 'Description' }} />
+			<PostItem post={{ id: 2, title: 'JavaScript', body: 'Description' }} />
+			<PostItem post={{ id: 3, title: 'JavaScript', body: 'Description' }} />
 		</div>
 	);
 }
