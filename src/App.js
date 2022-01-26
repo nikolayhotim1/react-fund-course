@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import PostForm from './components/PostForm';
 import PostList from './components/PostList';
-import MyButton from './components/UI/button/MyButton';
-import MyInput from './components/UI/input/MyInput';
 import './styles/App.css';
 
 const App = () => {
@@ -11,36 +10,27 @@ const App = () => {
 		{ id: 3, title: 'JavaScript 3', body: 'Description 3' }
 	]);
 
-	const [post, setPost] = useState({ title: '', body: '' });
+	const createPost = (newPost) => {
+		setPosts([...posts, newPost]);
+	};
 
-	const addNewPost = (e) => {
-		e.preventDefault();
-		setPosts([...posts, { ...post, id: Date.now() }]);
-		setPost({ title: '', body: '' });
+	const removePost = (post) => {
+		setPosts(posts.filter(p => p.id !== post.id));
 	};
 
 	return (
 		<div className='app'>
-			<form>
-				<MyInput
-					autoFocus
-					value={post.title}
-					onChange={e => setPost({ ...post, title: e.target.value })}
-					type='text'
-					placeholder='Post title'
+			<PostForm create={createPost} />
+
+			{posts.length
+				? <PostList
+					remove={removePost}
+					posts={posts}
+					title='Posts list about JS'
 				/>
 
-				<MyInput
-					value={post.body}
-					onChange={e => setPost({ ...post, body: e.target.value })}
-					type='text'
-					placeholder='Post description'
-				/>
-
-				<MyButton onClick={addNewPost}>Create post</MyButton>
-			</form>
-
-			<PostList posts={posts} title='Posts list about JS' />
+				: <h1>Posts didn't find</h1>
+			}
 		</div>
 	);
 };

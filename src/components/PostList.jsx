@@ -2,7 +2,7 @@ import React from 'react';
 import PostItem from './PostItem';
 import '../styles/PostList.css';
 
-const PostList = ({ posts, title }) => {
+const PostList = ({ posts, title, remove }) => {
 	return (
 		<div className='post-list'>
 			<h1>{title}</h1>
@@ -12,6 +12,7 @@ const PostList = ({ posts, title }) => {
 					number={index + 1}
 					post={post}
 					key={post.id}
+					remove={remove}
 				/>
 			)}
 		</div>
