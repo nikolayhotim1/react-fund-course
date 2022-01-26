@@ -12,22 +12,40 @@ const App = () => {
 	]);
 
 	const [title, setTitle] = useState('');
+	const [body, setBody] = useState('');
 
 	const addNewPost = (e) => {
 		e.preventDefault();
-		console.log(title);
-	}
+
+		const newPost = {
+			id: Date.now(),
+			title,
+			body
+		};
+
+		setPosts([...posts, newPost]);
+		setTitle('');
+		setBody('');
+	};
 
 	return (
 		<div className='app'>
 			<form>
 				<MyInput
+					autoFocus
 					value={title}
 					onChange={e => setTitle(e.target.value)}
 					type='text'
 					placeholder='Post title'
 				/>
-				<MyInput type='text' placeholder='Post description' />
+
+				<MyInput
+					value={body}
+					onChange={e => setBody(e.target.value)}
+					type='text'
+					placeholder='Post description'
+				/>
+
 				<MyButton onClick={addNewPost}>Create post</MyButton>
 			</form>
 
