@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
+import MySelect from './components/UI/select/MySelect';
 import './styles/App.css';
 
 const App = () => {
@@ -10,6 +11,8 @@ const App = () => {
 		{ id: 3, title: 'JavaScript 3', body: 'Description 3' }
 	]);
 
+	const [selectedSort, setSelectedSort] = useState('');
+
 	const createPost = (newPost) => {
 		setPosts([...posts, newPost]);
 	};
@@ -18,15 +21,34 @@ const App = () => {
 		setPosts(posts.filter(p => p.id !== post.id));
 	};
 
+	const sortPosts = (sort) => {
+		setSelectedSort(sort);
+		setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+	};
+
 	return (
 		<div className='app'>
 			<PostForm create={createPost} />
+			<hr />
+
+			<div>
+				<MySelect
+					value={selectedSort}
+					onChange={sortPosts}
+					defaultValue='Sort by'
+
+					options={[
+						{ value: 'title', name: 'title' },
+						{ value: 'body', name: 'description' }
+					]}
+				/>
+			</div>
 
 			{posts.length
 				? <PostList
 					remove={removePost}
 					posts={posts}
-					title='Posts list about JS'
+					title='Post list about JS'
 				/>
 
 				: <h1>Posts didn't find</h1>
