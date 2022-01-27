@@ -3,6 +3,12 @@ import PostItem from './PostItem';
 import '../styles/PostList.css';
 
 const PostList = ({ posts, title, remove }) => {
+	if (!posts.length) {
+		return (
+			<h1>Posts didn't find</h1>
+		);
+	}
+
 	return (
 		<div className='post-list'>
 			<h1>{title}</h1>
