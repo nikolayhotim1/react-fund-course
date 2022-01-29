@@ -20,3 +20,24 @@ h1 {
 .app hr {
     margin: 15px 0;
 }
+
+.post-enter {
+    opacity: 0;
+    transform: translateX(500px);
+}
+
+.post-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms, transform 500ms;
+}
+
+.post-exit {
+    opacity: 1;
+}
+
+.post-exit-active {
+    opacity: 0;
+    transform: translateX(-500px);
+    transition: opacity 500ms, transform 500ms;
+}

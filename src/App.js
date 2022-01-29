@@ -1,36 +1,21 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import PostFilter from './components/PostFilter';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
+import MyButton from './components/UI/button/MyButton';
+import MyModal from './components/UI/MyModal/MyModal';
+import { usePosts } from './hooks/usePosts';
 import './styles/App.css';
 
 const App = () => {
-	const [posts, setPosts] = useState([
-		{ id: 1, title: '3', body: '2' },
-		{ id: 2, title: '1', body: '3' },
-		{ id: 3, title: '2', body: '1' }
-	]);
-
-	const [filter, setFilter] = useState({ sort: '', query: '' })
-
-	const sortedPosts = useMemo(() => {
-		if (filter.sort) {
-			return [...posts].sort((a, b) =>
-				a[filter.sort].localeCompare(b[filter.sort])
-			);
-		}
-
-		return posts;
-	}, [filter.sort, posts]);
-
-	const sortedAndSearchedPosts = useMemo(() => {
-		return sortedPosts.filter(post =>
-			post.title.toLowerCase().includes(filter.query.toLowerCase())
-		);
-	}, [filter.query, sortedPosts]);
+	const [posts, setPosts] = useState([]);
+	const [filter, setFilter] = useState({ sort: '', query: '' });
+	const [modal, setModal] = useState(false);
+	const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
 	const createPost = (newPost) => {
 		setPosts([...posts, newPost]);
+		setModal(false);
 	};
 
 	const removePost = (post) => {
@@ -39,7 +24,15 @@ const App = () => {
 
 	return (
 		<div className='app'>
-			<PostForm create={createPost} />
+			<MyButton
+				style={{ marginTop: 30 }}
+				onClick={() => setModal(true)}>
+				Create post
+			</MyButton>
+			<MyModal visible={modal} setVisible={setModal}>
+				<PostForm create={createPost} />
+			</MyModal>
+
 			<hr />
 
 			<PostFilter
