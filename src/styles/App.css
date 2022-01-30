@@ -1,43 +1,59 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 #root {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .app {
-    width: 800px;
+	width: 800px;
 }
 
 h1 {
-    text-align: center;
+	text-align: center;
 }
 
 .app hr {
-    margin: 15px 0;
+	margin: 15px 0;
 }
 
 .post-enter {
-    opacity: 0;
-    transform: translateX(500px);
+	opacity: 0;
+	transform: translateX(500px);
 }
 
 .post-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 500ms, transform 500ms;
+	opacity: 1;
+	transform: translateX(0);
+	transition: opacity 500ms, transform 500ms;
 }
 
 .post-exit {
-    opacity: 1;
+	opacity: 1;
 }
 
 .post-exit-active {
-    opacity: 0;
-    transform: translateX(-500px);
-    transition: opacity 500ms, transform 500ms;
+	opacity: 0;
+	transform: translateX(-500px);
+	transition: opacity 500ms, transform 500ms;
+}
+
+.page-wrapper {
+	margin: 30px 0;
+	display: flex;
+}
+
+.page {
+	padding: 10px;
+	border: 1px solid teal;
+	cursor: pointer;
+}
+
+.page-current {
+	border: 2px solid orange;
+	font-weight: bold;
 }
