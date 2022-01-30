@@ -1,6 +1,5 @@
 import React from 'react';
 import PostItem from './PostItem';
-import '../styles/PostList.css';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from 'react-transition-group';
 
@@ -12,7 +11,7 @@ const PostList = ({ posts, title, remove }) => {
 	}
 
 	return (
-		<div className='post-list'>
+		<div>
 			<h1>{title}</h1>
 
 			<TransitionGroup>

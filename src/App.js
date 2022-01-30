@@ -6,7 +6,8 @@ import PostList from './components/PostList';
 import MyButton from './components/UI/button/MyButton';
 import Loader from './components/UI/Loader/Loader';
 import MyModal from './components/UI/MyModal/MyModal';
-import { getPagesArray, getPagesCount } from './components/utils/pages';
+import Pagination from './components/UI/pagination/Pagination';
+import { getPagesCount } from './components/utils/pages';
 import { useFetching } from './hooks/useFetching';
 import { usePosts } from './hooks/usePosts';
 import './styles/App.css';
@@ -19,7 +20,6 @@ const App = () => {
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(1);
 	const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-	const pagesArray = getPagesArray(totalPages);
 
 	const [fetchPosts, isPostLoading, postError] = useFetching(async (limit, page) => {
 		const response = await PostService.getAll(limit, page);
@@ -48,8 +48,6 @@ const App = () => {
 
 	return (
 		<div className='app'>
-			<button onClick={fetchPosts}>GET POSTS</button>
-
 			<MyButton
 				style={{ marginTop: 30, marginLeft: 30 }}
 				onClick={() => setModal(true)}>
@@ -87,18 +85,11 @@ const App = () => {
 				/>
 			}
 
-			<div className='page-wrapper'>
-				{pagesArray.map(p =>
-					<span
-						onClick={() => changePage(p)}
-						key={p}
-						className={page === p
-							? 'page page-current'
-							: 'page'
-						}
-					>{p}</span>
-				)}
-			</div>
+			<Pagination
+				page={page}
+				changePage={changePage}
+				totalPages={totalPages}
+			/>
 		</div>
 	);
 };
