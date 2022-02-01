@@ -69,5 +69,17 @@ h1 {
 }
 
 .navbar-links {
-	margin-left: auto;
+	display: flex;
+	margin-right: auto;
+}
+
+.navbar-links a {
+	text-decoration: none;
+	margin-right: 30px;
+	color: teal;
+	font-size: 20px;
+}
+
+.navbar-links a:hover {
+	color: orange;
 }

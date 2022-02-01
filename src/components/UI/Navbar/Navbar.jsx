@@ -13,14 +13,14 @@ const Navbar = () => {
 
 	return (
 		<div className='navbar'>
-			<MyButton onClick={logout}>
-				Log out
-			</MyButton>
-
 			<div className='navbar-links'>
 				<Link to='/about'>About the site</Link>
 				<Link to='/posts'>Posts</Link>
 			</div>
+
+			<MyButton onClick={logout}>
+				Log out
+			</MyButton>
 		</div>
 	);
 };
