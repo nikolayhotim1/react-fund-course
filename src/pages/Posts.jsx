@@ -94,10 +94,7 @@ const Posts = () => {
 				title='Posts about JS'
 			/>
 
-			<div
-				ref={lastElement}
-				style={{ height: 20, background: 'red' }}
-			/>
+			<div ref={lastElement} />
 
 			{isPostLoading &&
 				<div style={{
